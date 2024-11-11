@@ -1,0 +1,63 @@
+[gd_scene load_steps=8 format=3 uid="uid://iap4u2tmd7a1"]
+
+[ext_resource type="PackedScene" uid="uid://bubdbeob0baki" path="res://scenes/ball.tscn" id="2_26hxr"]
+[ext_resource type="PackedScene" uid="uid://cp3mblbnt4isx" path="res://scenes/player_paddle.tscn" id="4_5sok2"]
+
+[sub_resource type="GDScript" id="GDScript_abgpj"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_dv5ea"]
+normal = Vector2(0, 1)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_tt7mt"]
+distance = -227.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_cmpvh"]
+normal = Vector2(1, 0)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_au6n7"]
+normal = Vector2(-1, 0)
+
+[node name="TestLevel" type="Node2D"]
+script = SubResource("GDScript_abgpj")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(3, 3)
+
+[node name="Boundaries" type="Node" parent="."]
+
+[node name="North" type="StaticBody2D" parent="Boundaries" groups=["Wall"]]
+position = Vector2(-100, 0)
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/North"]
+position = Vector2(100, -106)
+shape = SubResource("WorldBoundaryShape2D_dv5ea")
+
+[node name="South" type="StaticBody2D" parent="Boundaries" groups=["Wall"]]
+position = Vector2(-100, 0)
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/South"]
+position = Vector2(100, -121)
+shape = SubResource("WorldBoundaryShape2D_tt7mt")
+
+[node name="West" type="StaticBody2D" parent="Boundaries" groups=["Wall"]]
+position = Vector2(-100, 0)
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/West"]
+shape = SubResource("WorldBoundaryShape2D_cmpvh")
+
+[node name="East" type="StaticBody2D" parent="Boundaries" groups=["Wall"]]
+position = Vector2(100, 0)
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/East"]
+shape = SubResource("WorldBoundaryShape2D_au6n7")
+
+[node name="PlayerPaddle" parent="." instance=ExtResource("4_5sok2")]
+position = Vector2(-29, 93)
+collision_mask = 3
+
+[node name="Ball" parent="." instance=ExtResource("2_26hxr")]
+collision_mask = 3
