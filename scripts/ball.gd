@@ -13,13 +13,13 @@ func _ready() -> void:
 	apply_central_impulse(velocity * force)
 
 func _physics_process(delta: float) -> void:
-	# Adds a minimum and maximum spell for the ball
+	# Adds a minimum and maximum speed for the ball
 	if abs(linear_velocity.y) > max_ball_speed:
 		linear_velocity.y = max_ball_speed if linear_velocity.y > 0 else -max_ball_speed
 	elif abs(linear_velocity.y) < min_ball_speed:
 		linear_velocity.y = min_ball_speed if linear_velocity.y > 0 else -min_ball_speed
 
-	# Limits how much a character can change the ball's trajectory
+	# Limits how much the ball's trajectory can change
 	if abs(linear_velocity.x) > max_ball_speed:
 		linear_velocity.x = max_ball_speed if linear_velocity.x > 0 else -max_ball_speed
 
